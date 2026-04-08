@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CourseCard from '@/components/CourseCard.astro';
+import { getCollection } from 'astro:content';
+
+const agentic = (await getCollection('agentic')).sort((a, b) => a.data.order - b.data.order);
+const basePath = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Agentic Development" description="Build with AI agents — coding agents, MCP servers, and multi-agent workflows">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-extrabold text-surface-900 dark:text-white sm:text-4xl">
+        🤖 Agentic Development
+      </h1>
+      <p class="mt-3 text-lg text-surface-600 dark:text-surface-400 max-w-2xl mx-auto">
+        Learn the cutting edge of AI-powered development. Build with coding agents, MCP servers, custom extensions, and multi-agent workflows.
+      </p>
+    </div>
+
+    {agentic.length === 0 ? (
+      <div class="text-center py-16 text-surface-500 dark:text-surface-400">
+        <p class="text-lg">Agentic development courses coming soon! 🚧</p>
+        <p class="mt-2 text-sm">Check back shortly — new content is being generated.</p>
+      </div>
+    ) : (
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {agentic.map((course) => (
+          <CourseCard
+            title={course.data.title}
+            description={course.data.description}
+            href={`${basePath}agentic/${course.id.replace(/\.md$/, '')}`}
+            icon={course.data.icon}
+            difficulty={course.data.difficulty}
+            duration={course.data.duration}
+            tags={course.data.tags}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

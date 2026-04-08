@@ -1,0 +1,140 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CategoryCard from '@/components/CategoryCard.astro';
+import { getCollection } from 'astro:content';
+
+const workshops = await getCollection('workshops');
+const paths = await getCollection('paths');
+const technologies = await getCollection('technologies');
+const agentic = await getCollection('agentic');
+const basePath = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Home" description="Learn GitHub Copilot and agentic development with free, hands-on workshops">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 text-white">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-50"></div>
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          Master GitHub Copilot &<br/>
+          <span class="text-primary-200">Agentic Development</span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-primary-100 sm:text-xl">
+          Free, hands-on workshops to supercharge your development workflow.
+          Learn by doing — from code completion to building AI agents.
+        </p>
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href={`${basePath}workshops`} class="inline-flex items-center rounded-xl bg-white px-6 py-3 text-base font-semibold text-primary-700 shadow-lg transition hover:bg-primary-50 hover:shadow-xl">
+            Start Learning
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </a>
+          <a href={`${basePath}catalog`} class="inline-flex items-center rounded-xl border-2 border-white/30 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10">
+            Browse Catalog
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-4">
+        <div class="text-center">
+          <div class="text-3xl font-bold">{workshops.length}</div>
+          <div class="text-sm text-primary-200">Workshops</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold">{paths.length}</div>
+          <div class="text-sm text-primary-200">Learning Paths</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold">{technologies.length}</div>
+          <div class="text-sm text-primary-200">Technologies</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold">{agentic.length}</div>
+          <div class="text-sm text-primary-200">Agentic Courses</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 class="text-center text-2xl font-bold text-surface-900 dark:text-white sm:text-3xl">
+      Choose Your Learning Path
+    </h2>
+    <p class="mx-auto mt-3 max-w-2xl text-center text-surface-600 dark:text-surface-400">
+      Whether you're just getting started or building AI-powered workflows, we have something for you.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <CategoryCard
+        title="Workshops"
+        description="Hands-on tutorials for every Copilot feature — chat, CLI, completions, and more"
+        href={`${basePath}workshops`}
+        icon="🛠️"
+        color="primary"
+        count={workshops.length}
+      />
+      <CategoryCard
+        title="Learning Paths"
+        description="Curated journeys tailored to your role — frontend, backend, DevOps, and more"
+        href={`${basePath}paths`}
+        icon="🗺️"
+        color="purple"
+        count={paths.length}
+      />
+      <CategoryCard
+        title="Technologies"
+        description="See how Copilot accelerates development in your favorite language or framework"
+        href={`${basePath}technologies`}
+        icon="💻"
+        color="green"
+        count={technologies.length}
+      />
+      <CategoryCard
+        title="Agentic Dev"
+        description="Build with AI agents — coding agents, MCP servers, and multi-agent workflows"
+        href={`${basePath}agentic`}
+        icon="🤖"
+        color="orange"
+        count={agentic.length}
+      />
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="border-t border-surface-200 bg-surface-50 dark:border-surface-800 dark:bg-surface-900/50">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 class="text-center text-2xl font-bold text-surface-900 dark:text-white sm:text-3xl">
+        Why Learn Here?
+      </h2>
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-2xl dark:bg-primary-900/30">🆓</div>
+          <h3 class="mt-4 text-lg font-semibold text-surface-900 dark:text-white">100% Free & Open</h3>
+          <p class="mt-2 text-sm text-surface-600 dark:text-surface-400">No sign-ups, no paywalls. All content is open source and community-driven.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-2xl dark:bg-green-900/30">🖐️</div>
+          <h3 class="mt-4 text-lg font-semibold text-surface-900 dark:text-white">Hands-On First</h3>
+          <p class="mt-2 text-sm text-surface-600 dark:text-surface-400">Every course includes practical exercises. Learn by building real things, not watching slides.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-2xl dark:bg-purple-900/30">🤖</div>
+          <h3 class="mt-4 text-lg font-semibold text-surface-900 dark:text-white">AI-Generated, Human-Reviewed</h3>
+          <p class="mt-2 text-sm text-surface-600 dark:text-surface-400">Courses are auto-generated from the latest sources and reviewed for quality before publishing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-2xl font-bold text-surface-900 dark:text-white sm:text-3xl">Ready to Get Started?</h2>
+    <p class="mt-3 text-surface-600 dark:text-surface-400">Pick a workshop and start building with AI in minutes.</p>
+    <a href={`${basePath}workshops`} class="mt-6 inline-flex items-center rounded-xl bg-primary-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-primary-700 hover:shadow-xl">
+      Browse Workshops
+      <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+  </section>
+</BaseLayout>

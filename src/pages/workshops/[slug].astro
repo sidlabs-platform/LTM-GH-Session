@@ -1,0 +1,28 @@
+---
+import CourseLayout from '@/layouts/CourseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const workshops = await getCollection('workshops');
+  return workshops.map((entry) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const editUrl = `https://github.com/sidlabs-platform/LTM-GH-Session/edit/main/src/content/workshops/${entry.id}`;
+---
+
+<CourseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  category="workshops"
+  difficulty={entry.data.difficulty}
+  duration={entry.data.duration}
+  lastUpdated={entry.data.lastUpdated}
+  editUrl={editUrl}
+>
+  <Content />
+</CourseLayout>

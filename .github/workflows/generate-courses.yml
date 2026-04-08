@@ -1,0 +1,94 @@
+name: Generate Course Content
+
+on:
+  workflow_dispatch:
+    inputs:
+      course_type:
+        description: 'Course type to generate'
+        required: true
+        type: choice
+        options:
+          - workshop
+          - path
+          - technology
+          - agentic
+      topic:
+        description: 'Topic slug (e.g., "python", "mcp-servers", "devops-engineer")'
+        required: true
+        type: string
+      sources:
+        description: 'Comma-separated source IDs (leave empty for all enabled)'
+        required: false
+        type: string
+      fetch_sources:
+        description: 'Fetch latest source content before generating'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub CLI
+        run: |
+          gh extension install github/gh-copilot || true
+
+      - name: Install dependencies
+        run: sudo apt-get install -y jq
+
+      - name: Fetch sources
+        if: ${{ inputs.fetch_sources }}
+        run: |
+          chmod +x scripts/fetch-sources.sh
+          ./scripts/fetch-sources.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate course content
+        run: |
+          chmod +x scripts/generate-course.sh
+          ARGS="--type ${{ inputs.course_type }} --topic ${{ inputs.topic }}"
+          if [ -n "${{ inputs.sources }}" ]; then
+            ARGS="$ARGS --sources ${{ inputs.sources }}"
+          fi
+          ./scripts/generate-course.sh $ARGS
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "feat: auto-generate ${{ inputs.course_type }} course — ${{ inputs.topic }}"
+          title: "🤖 Generated ${{ inputs.course_type }}: ${{ inputs.topic }}"
+          body: |
+            ## Auto-Generated Course Content
+
+            **Type:** ${{ inputs.course_type }}
+            **Topic:** ${{ inputs.topic }}
+            **Sources:** ${{ inputs.sources || 'all enabled' }}
+
+            ---
+
+            This content was auto-generated using the course generation pipeline.
+            Please review the content for accuracy and quality before merging.
+
+            ### Review Checklist
+            - [ ] Content is accurate and up-to-date
+            - [ ] Code examples work correctly
+            - [ ] Frontmatter metadata is correct
+            - [ ] No broken links
+            - [ ] Exercises are clear and achievable
+          branch: "course-gen/${{ inputs.course_type }}-${{ inputs.topic }}"
+          labels: |
+            auto-generated
+            needs-review
+          delete-branch: true

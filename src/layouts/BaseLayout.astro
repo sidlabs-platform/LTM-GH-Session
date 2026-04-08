@@ -1,0 +1,129 @@
+---
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = 'Learn GitHub Copilot and agentic development with hands-on workshops', ogImage } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const basePath = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <title>{title} | Copilot Learning Platform</title>
+
+    <!-- Dark mode script (runs before paint to prevent flash) -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-surface-900 dark:bg-surface-950 dark:text-surface-100 flex flex-col">
+    <header class="sticky top-0 z-50 border-b border-surface-200 bg-white/80 backdrop-blur-md dark:border-surface-800 dark:bg-surface-950/80">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <a href={basePath} class="flex items-center gap-2 text-lg font-bold text-surface-900 dark:text-white">
+          <svg class="h-7 w-7 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          Copilot Learn
+        </a>
+
+        <!-- Desktop navigation -->
+        <div class="hidden items-center gap-6 md:flex">
+          <a href={`${basePath}workshops`} class="text-sm font-medium text-surface-600 hover:text-primary-600 dark:text-surface-300 dark:hover:text-primary-400 transition-colors">Workshops</a>
+          <a href={`${basePath}paths`} class="text-sm font-medium text-surface-600 hover:text-primary-600 dark:text-surface-300 dark:hover:text-primary-400 transition-colors">Learning Paths</a>
+          <a href={`${basePath}technologies`} class="text-sm font-medium text-surface-600 hover:text-primary-600 dark:text-surface-300 dark:hover:text-primary-400 transition-colors">Technologies</a>
+          <a href={`${basePath}agentic`} class="text-sm font-medium text-surface-600 hover:text-primary-600 dark:text-surface-300 dark:hover:text-primary-400 transition-colors">Agentic Dev</a>
+          <a href={`${basePath}catalog`} class="text-sm font-medium text-surface-600 hover:text-primary-600 dark:text-surface-300 dark:hover:text-primary-400 transition-colors">Catalog</a>
+
+          <!-- Dark mode toggle -->
+          <button id="theme-toggle" class="rounded-lg p-2 text-surface-500 hover:bg-surface-100 dark:text-surface-400 dark:hover:bg-surface-800 transition-colors" aria-label="Toggle dark mode">
+            <svg class="h-5 w-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+            <svg class="h-5 w-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          </button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden rounded-lg p-2 text-surface-500 hover:bg-surface-100 dark:text-surface-400 dark:hover:bg-surface-800" aria-label="Toggle menu">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </nav>
+
+      <!-- Mobile navigation -->
+      <div id="mobile-menu" class="hidden border-t border-surface-200 dark:border-surface-800 md:hidden">
+        <div class="space-y-1 px-4 py-3">
+          <a href={`${basePath}workshops`} class="block rounded-lg px-3 py-2 text-sm font-medium text-surface-600 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-800">Workshops</a>
+          <a href={`${basePath}paths`} class="block rounded-lg px-3 py-2 text-sm font-medium text-surface-600 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-800">Learning Paths</a>
+          <a href={`${basePath}technologies`} class="block rounded-lg px-3 py-2 text-sm font-medium text-surface-600 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-800">Technologies</a>
+          <a href={`${basePath}agentic`} class="block rounded-lg px-3 py-2 text-sm font-medium text-surface-600 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-800">Agentic Dev</a>
+          <a href={`${basePath}catalog`} class="block rounded-lg px-3 py-2 text-sm font-medium text-surface-600 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-800">Catalog</a>
+          <button id="theme-toggle-mobile" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-surface-600 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-800">
+            Toggle Dark Mode
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-surface-200 dark:border-surface-800">
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm text-surface-500 dark:text-surface-400">
+            Built with ❤️ using GitHub Copilot · Open source and free for everyone
+          </p>
+          <div class="flex gap-4">
+            <a href="https://github.com/sidlabs-platform/LTM-GH-Session" class="text-surface-400 hover:text-surface-600 dark:hover:text-surface-300 transition-colors" aria-label="GitHub">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function setupThemeToggle() {
+        const toggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+        toggles.forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+          });
+        });
+      }
+
+      function setupMobileMenu() {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+      }
+
+      setupThemeToggle();
+      setupMobileMenu();
+      document.addEventListener('astro:after-swap', () => { setupThemeToggle(); setupMobileMenu(); });
+    </script>
+  </body>
+</html>

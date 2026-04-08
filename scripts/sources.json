@@ -1,0 +1,94 @@
+{
+  "sources": [
+    {
+      "id": "github-copilot-docs",
+      "name": "GitHub Copilot Documentation",
+      "url": "https://docs.github.com/en/copilot",
+      "type": "documentation",
+      "phase": 1,
+      "enabled": true,
+      "topics": ["copilot", "features", "setup", "configuration"]
+    },
+    {
+      "id": "github-blog",
+      "name": "GitHub Blog",
+      "url": "https://github.blog",
+      "type": "blog",
+      "phase": 1,
+      "enabled": true,
+      "topics": ["copilot", "features", "announcements", "updates"]
+    },
+    {
+      "id": "github-changelog",
+      "name": "GitHub Changelog",
+      "url": "https://github.blog/changelog",
+      "type": "changelog",
+      "phase": 1,
+      "enabled": true,
+      "topics": ["copilot", "releases", "updates"]
+    },
+    {
+      "id": "vscode-copilot-docs",
+      "name": "VS Code Copilot Documentation",
+      "url": "https://code.visualstudio.com/docs/copilot",
+      "type": "documentation",
+      "phase": 1,
+      "enabled": true,
+      "topics": ["vscode", "copilot", "editor", "extensions"]
+    },
+    {
+      "id": "github-cli-docs",
+      "name": "GitHub CLI Documentation",
+      "url": "https://cli.github.com/manual",
+      "type": "documentation",
+      "phase": 1,
+      "enabled": true,
+      "topics": ["cli", "copilot", "commands"]
+    },
+    {
+      "id": "microsoft-devblog",
+      "name": "Microsoft Developer Blog",
+      "url": "https://devblogs.microsoft.com",
+      "type": "blog",
+      "phase": 2,
+      "enabled": false,
+      "topics": ["copilot", "ai", "development", "azure"]
+    },
+    {
+      "id": "anthropic-blog",
+      "name": "Anthropic Blog",
+      "url": "https://www.anthropic.com/news",
+      "type": "blog",
+      "phase": 2,
+      "enabled": false,
+      "topics": ["ai", "claude", "agents", "mcp"]
+    },
+    {
+      "id": "openai-blog",
+      "name": "OpenAI Blog",
+      "url": "https://openai.com/blog",
+      "type": "blog",
+      "phase": 2,
+      "enabled": false,
+      "topics": ["ai", "gpt", "models", "agents"]
+    },
+    {
+      "id": "vscode-updates",
+      "name": "VS Code Release Notes",
+      "url": "https://code.visualstudio.com/updates",
+      "type": "changelog",
+      "phase": 2,
+      "enabled": false,
+      "topics": ["vscode", "editor", "features", "copilot"]
+    }
+  ],
+  "generation": {
+    "outputDir": "src/content",
+    "branchPrefix": "course-gen",
+    "prLabels": ["auto-generated", "needs-review"],
+    "frontmatterTemplate": {
+      "generatedBy": "copilot-cli",
+      "sources": []
+    }
+  }
+}

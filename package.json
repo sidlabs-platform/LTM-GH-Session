@@ -1,0 +1,22 @@
+{
+  "name": "copilot-learning-platform",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A learning platform for GitHub Copilot and agentic development",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.7.10",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.2.6",
+    "tailwindcss": "^4.1.4",
+    "@tailwindcss/vite": "^4.1.4",
+    "typescript": "^5.8.3",
+    "sharp": "^0.33.5"
+  }
+}

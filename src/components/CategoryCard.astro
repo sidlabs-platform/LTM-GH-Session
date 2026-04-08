@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  color?: string;
+  count?: number;
+}
+
+const { title, description, href, icon, color = 'primary', count } = Astro.props;
+
+const colorClasses: Record<string, string> = {
+  primary: 'from-primary-500 to-primary-700',
+  purple: 'from-purple-500 to-purple-700',
+  green: 'from-green-500 to-green-700',
+  orange: 'from-orange-500 to-orange-700',
+};
+---
+
+<a href={href} class="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-surface-200 dark:border-surface-700 dark:bg-surface-900 transition-all hover:shadow-lg hover:-translate-y-1">
+  <div class={`h-2 bg-gradient-to-r ${colorClasses[color] || colorClasses.primary}`}></div>
+  <div class="p-6">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-3xl">{icon}</span>
+      {count !== undefined && (
+        <span class="ml-auto rounded-full bg-surface-100 px-2.5 py-0.5 text-xs font-medium text-surface-600 dark:bg-surface-800 dark:text-surface-400">
+          {count} courses
+        </span>
+      )}
+    </div>
+    <h3 class="text-lg font-bold text-surface-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+      {title}
+    </h3>
+    <p class="mt-2 text-sm text-surface-600 dark:text-surface-400 line-clamp-2">{description}</p>
+  </div>
+</a>
