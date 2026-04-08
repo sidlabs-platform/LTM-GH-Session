@@ -3,7 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://laughing-adventure-e425vm3.pages.github.io',
+  site: 'https://sidlabs-platform.github.io',
+  base: '/LTM-GH-Session',
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
