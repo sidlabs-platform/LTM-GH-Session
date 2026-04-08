@@ -31,6 +31,16 @@ You've used `gh copilot suggest` and `gh copilot explain` — but did you know e
 - Scripting Copilot suggestions for automation and CI workflows
 - Key environment variables and how they affect output
 
+## Prerequisites
+
+1. **GitHub CLI** (`gh`) version 2.40.0 or later — [install guide](https://cli.github.com/)
+2. **Copilot in the CLI extension** installed:
+   ```bash
+   gh extension install github/gh-copilot
+   ```
+3. Authenticated with `gh auth login`
+4. Completed the [GitHub Copilot in the CLI](./copilot-cli) workshop or equivalent hands-on experience
+
 ---
 
 ## Command Reference
@@ -199,7 +209,7 @@ alias 'gg'='gh copilot suggest --target git'
 alias 'ggh'='gh copilot suggest --target gh'
 ```
 
-> **Tip:** The `??` and `?!` aliases are the ones recommended by the official gh-copilot docs.
+> **💡 Tip:** The `??` and `?!` aliases are the ones recommended by the official gh-copilot docs.
 
 ### Step 2: A Smarter Shell Function
 
@@ -310,7 +320,7 @@ Set a reminder to run `gh extension upgrade github/gh-copilot` monthly to pick u
 
 ---
 
-## Pro Tips
+## Tips & Tricks
 
 - **Be specific about context.** Instead of `"delete a branch"`, write `"delete a local git branch named feature/login and its remote tracking branch"`.
 - **State the output format you want.** Try appending `"output as a one-liner"` or `"use --porcelain format"` to your prompt.

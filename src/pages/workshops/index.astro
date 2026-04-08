@@ -4,7 +4,7 @@ import CourseCard from '@/components/CourseCard.astro';
 import { getCollection } from 'astro:content';
 
 const workshops = (await getCollection('workshops')).sort((a, b) => a.data.order - b.data.order);
-const basePath = import.meta.env.BASE_URL;
+const basePath = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <BaseLayout title="Workshops" description="Hands-on workshops covering every GitHub Copilot feature">

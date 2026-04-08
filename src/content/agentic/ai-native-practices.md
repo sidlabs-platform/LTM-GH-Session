@@ -348,6 +348,18 @@ Every piece of explicit context makes AI more effective — and it makes your co
 
 ---
 
+## Limitations & Considerations
+
+- **AI suggestions are not guarantees** — Copilot-generated code can contain subtle bugs, incorrect assumptions, or outdated patterns. AI-native practices improve the quality of suggestions but never eliminate the need for human review.
+- **Over-reliance risk** — Teams new to AI-native development may accept AI suggestions without critical evaluation. Maintain a culture where every suggestion is reviewed for correctness, security, and alignment with project requirements.
+- **Context window limits** — Copilot cannot read your entire codebase at once. It works with the files you have open, recent context, and instruction files. Very large or complex codebases may need more explicit guidance in `copilot-instructions.md`.
+- **Instruction maintenance** — Custom instructions and prompt files are only valuable if they stay current. Outdated instructions can actively mislead AI. Include instruction file reviews in your regular maintenance cycle.
+- **Not all code benefits equally** — AI-native practices yield the greatest improvement for well-typed, well-structured codebases. Legacy code with minimal types, unclear naming, or complex implicit dependencies will see less benefit until refactored.
+- **Privacy and IP considerations** — Understand your organization's Copilot data handling policies. Code sent to Copilot for suggestions is subject to GitHub's data usage terms. Ensure sensitive or proprietary logic is handled according to your security policies.
+- **Measurement is hard** — Metrics like "time to first commit" and "test coverage" are proxies. Correlating productivity improvements directly to AI-native practices requires careful before/after comparison with controlled variables.
+
+---
+
 ## Summary
 
 In this workshop you learned:

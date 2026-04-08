@@ -335,6 +335,47 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, PagedRe
 
 ---
 
+## C#/.NET Pro Tips
+
+### 1. Use XML Documentation Comments as Prompts
+
+```csharp
+/// <summary>
+/// Calculates the total price including tax and applies a discount if applicable.
+/// </summary>
+/// <param name="items">The line items in the order.</param>
+/// <param name="taxRate">Tax rate as a decimal (e.g., 0.08 for 8%).</param>
+/// <param name="discountCode">Optional discount code to apply.</param>
+/// <returns>The final calculated total.</returns>
+public decimal CalculateOrderTotal(List<OrderItem> items, decimal taxRate, string? discountCode = null)
+{
+    // Copilot generates accurate implementation using the XML doc as context
+```
+
+### 2. Define Records and Interfaces Before Implementation
+
+Write your DTOs, request/response records, and service interfaces first. Copilot uses these as blueprints to generate controllers, services, and tests that match your contracts exactly.
+
+### 3. Leverage the Options Pattern for Configuration
+
+```csharp
+// Type the options class — Copilot generates the registration and validation
+public class SmtpOptions
+{
+    public const string SectionName = "Smtp";
+    public required string Host { get; init; }
+    public required int Port { get; init; }
+    public required string Username { get; init; }
+}
+// Follow with: // Register and validate SmtpOptions from configuration
+```
+
+### 4. Keep Entity, Configuration, and Repository Open Together
+
+Open the EF Core entity class, its `IEntityTypeConfiguration`, and the repository in adjacent tabs. Copilot uses cross-file context heavily and will generate repository methods that correctly reference entity properties and relationships.
+
+---
+
 ## Common Patterns
 
 | Prompt / Context | What Copilot Generates |

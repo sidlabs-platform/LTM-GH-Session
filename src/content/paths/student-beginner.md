@@ -110,6 +110,37 @@ The terminal can be intimidating for beginners. Copilot CLI translates plain Eng
 
 ---
 
+### Step 4: Practice with Mini-Projects 🛠️
+**Activity:** Self-guided exercises · ⏱️ *~45 minutes*
+
+Before tackling a full project, practice the skills you've learned with small, focused exercises that each take 10–15 minutes.
+
+**Exercises to try:**
+- **Calculator** — build a simple calculator that adds, subtracts, multiplies, and divides. Use code completions to write each function and Copilot Chat to add input validation.
+- **Greeting generator** — write a program that asks for your name and prints a personalized greeting. Experiment with different completions.
+- **Number guessing game** — create a game where the computer picks a random number and the user guesses. Ask Copilot Chat how to generate random numbers if you get stuck.
+- **Tip calculator** — build a tip calculator that takes a bill amount and tip percentage. Practice accepting and rejecting suggestions.
+
+> 💡 **Tip:** After each exercise, ask Copilot Chat to review your code: "Is there a simpler way to write this?" You'll learn new patterns every time.
+
+---
+
+### Step 5: Version Control Basics with Copilot 🔀
+**Activity:** Guided practice · ⏱️ *~30 minutes*
+
+Every developer needs to know Git. With Copilot CLI, you can learn version control without memorizing commands.
+
+**What you'll practice:**
+- Creating a Git repository for your exercises from Step 4
+- Making your first commit — ask Copilot CLI "How do I stage all changes and commit?"
+- Understanding the add → commit → push workflow
+- Creating a GitHub repository and pushing your code to it
+- Reading basic `git log` and `git status` output with Copilot's help
+
+> 💡 **Tip:** Use Copilot CLI to translate commands like "Show me what I changed since my last commit" — it will produce the right `git diff` command and explain the output.
+
+---
+
 ## 🏗️ Practical Project: Build a To-Do App
 
 Time to put it all together! Use everything you've learned to build a **simple to-do application** with Copilot as your guide.

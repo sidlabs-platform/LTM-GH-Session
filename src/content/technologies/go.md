@@ -304,6 +304,41 @@ func (r *BookRepository) FindByAuthor(ctx context.Context, authorID int64) ([]Bo
 
 ---
 
+## Go-Specific Pro Tips
+
+### 1. Define Interfaces Where They're Used, Not Where They're Implemented
+
+Go's implicit interface satisfaction means Copilot generates tighter, more testable code when you define small interfaces at the call site:
+
+```go
+// In your handler package — Copilot generates mock-friendly code
+type BookService interface {
+	FindByID(ctx context.Context, id int64) (*Book, error)
+	Create(ctx context.Context, req CreateBookRequest) (*Book, error)
+}
+```
+
+### 2. Write the Struct and Constructor First
+
+Copilot uses the struct fields and constructor signature to infer what methods to generate. Define `BookHandler` with its dependencies, write `NewBookHandler`, and then each method signature — Copilot fills in correct implementations.
+
+### 3. Use Descriptive Error Messages with `%w` Wrapping
+
+```go
+// Copilot follows the wrapping pattern once you establish it
+if err != nil {
+    return fmt.Errorf("fetch book id=%d: %w", id, err)
+}
+```
+
+Start wrapping errors with `%w` in one function and Copilot will consistently apply the pattern in subsequent functions.
+
+### 4. Open `_test.go` Alongside the Source File
+
+Keep the source file and its test file open in adjacent tabs. Copilot uses the test expectations to infer correct behavior in the source, and vice versa — test generation is dramatically better when the implementation is visible.
+
+---
+
 ## Common Patterns
 
 | Prompt / Context | What Copilot Generates |

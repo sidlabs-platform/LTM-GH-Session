@@ -4,7 +4,7 @@ import CourseCard from '@/components/CourseCard.astro';
 import { getCollection } from 'astro:content';
 
 const agentic = (await getCollection('agentic')).sort((a, b) => a.data.order - b.data.order);
-const basePath = import.meta.env.BASE_URL;
+const basePath = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <BaseLayout title="Agentic Development" description="Build with AI agents — coding agents, MCP servers, and multi-agent workflows">

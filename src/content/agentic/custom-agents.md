@@ -412,6 +412,18 @@ Update your GitHub App's agent URL to point to the deployed endpoint.
 
 ---
 
+## Limitations & Considerations
+
+- **Hosting requirements** — Your agent endpoint must be publicly accessible over HTTPS. GitHub routes messages to your server's URL, so local-only servers won't work without a tunnel (e.g., ngrok) during development.
+- **Latency expectations** — Users expect near-instant responses in chat. If your agent calls slow external APIs, use streaming responses to provide incremental feedback rather than making the user wait for a complete response.
+- **No persistent conversation state** — GitHub sends the full conversation history with each request. Your server is stateless by default. If you need to track state across turns (e.g., pending confirmations), encode it in the conversation messages or use external storage.
+- **Rate limiting** — GitHub enforces rate limits on the Copilot Extensions API. If your extension becomes popular, plan for throttling and implement graceful degradation.
+- **Marketplace review process** — Publishing to the GitHub Marketplace requires a review. Ensure your extension handles errors gracefully, verifies request signatures, and follows GitHub's acceptable use policies.
+- **User context limitations** — Copilot references provide repository and file context, but not all context types are always available. Design your extension to work gracefully when references are missing or incomplete.
+- **Token and model costs** — If your extension calls LLM APIs for processing, those costs are yours to manage. Consider caching, response size limits, and usage tiers in your architecture.
+
+---
+
 ## Summary
 
 In this workshop you learned how to:

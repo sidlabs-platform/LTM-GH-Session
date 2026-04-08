@@ -19,6 +19,17 @@ Think of it as assigning a task to a capable junior developer: you describe what
 
 ---
 
+## What You'll Learn
+
+- What the coding agent is and how it differs from Copilot code completions
+- The **end-to-end workflow**: issue → agent analysis → code generation → PR
+- How to configure the agent's environment with **`copilot-setup-steps.yml`**
+- Writing **effective issues** that produce high-quality agent output
+- Reviewing, iterating on, and merging **agent-generated pull requests**
+- Customizing agent behavior with **`.github/copilot-instructions.md`**
+
+---
+
 ## How It Works
 
 When you assign an issue to the coding agent, a sequence of automated steps runs behind the scenes:

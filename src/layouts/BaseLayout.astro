@@ -9,7 +9,7 @@ interface Props {
 
 const { title, description = 'Learn GitHub Copilot and agentic development with hands-on workshops', ogImage } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const basePath = import.meta.env.BASE_URL;
+const basePath = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <!doctype html>

@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { title, description, category, difficulty, duration, lastUpdated, editUrl } = Astro.props;
-const basePath = import.meta.env.BASE_URL;
+const basePath = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 // Derive course ID from URL: e.g. /LTM-GH-Session/workshops/code-completion/ → workshops/code-completion
 const urlPath = Astro.url.pathname.replace(basePath, '').replace(/\/$/, '');

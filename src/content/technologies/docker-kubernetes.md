@@ -402,6 +402,39 @@ Key security patterns Copilot knows:
 
 ---
 
+## Docker & Kubernetes Pro Tips
+
+### 1. Describe Your App's Requirements in the First Comment
+
+```dockerfile
+# ✅ Specific — produces optimized, secure Dockerfile
+# Multi-stage Dockerfile for a Go API that connects to PostgreSQL
+# Statically compiled binary, scratch final image, non-root user
+
+# ❌ Vague — generic result
+# Dockerfile for an app
+```
+
+### 2. Reference the Target Environment in Kubernetes Manifests
+
+Include the namespace and a brief description of the workload's purpose. Copilot uses this context to set appropriate resource limits, replica counts, and probe thresholds.
+
+```yaml
+# Production deployment for the payment service
+# Needs high availability, strict security context, and PDB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+  namespace: production
+```
+
+### 3. Use `.dockerignore` Early
+
+Create the `.dockerignore` file before writing the Dockerfile. Start with a comment like `# Ignore patterns for a Node.js TypeScript project` and Copilot generates a comprehensive ignore list (node_modules, dist, .git, .env, etc.) that keeps your build context small and your images lean.
+
+---
+
 ## Common Patterns
 
 | Prompt / Context | What Copilot Generates |

@@ -345,6 +345,17 @@ jobs:
 
 ---
 
+## Limitations & Considerations
+
+- **Agent concurrency** — The coding agent processes one issue at a time per repository. If you assign multiple issues simultaneously, they queue and execute sequentially. Plan your workflow accordingly.
+- **Environment time limits** — The agent's cloud VM has execution time limits. Complex setup steps (large dependency installs, Docker builds) can eat into the time available for actual coding. Keep `copilot-setup-steps.yml` lean and cache aggressively.
+- **No persistent state between runs** — Each agent session starts from a fresh environment. It cannot remember context from previous issues or PRs. Include all necessary context in the issue description.
+- **External service access** — The agent cannot reach external APIs, private registries, or third-party services unless explicitly configured in the setup steps. Mock external dependencies for testing.
+- **Workflow trigger limitations** — GitHub Actions workflows triggered by `copilot[bot]` events may not trigger further workflows due to GitHub's recursive workflow prevention. Use a `workflow_dispatch` or personal access token to chain workflows if needed.
+- **Review overhead** — Automated pipelines still require human review. Resist the temptation to auto-merge without review, especially early on. Build trust incrementally.
+
+---
+
 ## Summary
 
 In this workshop you learned how to:

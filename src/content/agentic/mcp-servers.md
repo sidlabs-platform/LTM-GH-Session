@@ -455,6 +455,30 @@ Keep the server in your repository and reference it locally:
 
 ---
 
+## Best Practices
+
+- **Validate all inputs** — Treat every tool argument as untrusted. Use Zod schemas to validate and sanitize inputs before processing.
+- **Enforce read-only by default** — Tools that query data should not allow mutations. Explicitly separate read and write tools and require confirmation for destructive actions.
+- **Write descriptive `z.describe()` annotations** — Copilot uses parameter descriptions to decide when and how to invoke your tools. Vague descriptions lead to poor tool selection.
+- **Keep tools focused** — Each tool should do one thing well. A `query_database` tool and a `describe_table` tool are better than a single `database` tool that tries to do everything.
+- **Never log to stdout** — In stdio-based MCP servers, stdout is the communication channel. Use stderr or a log file for debugging output.
+- **Handle errors gracefully** — Return `isError: true` with a helpful message instead of letting exceptions crash the server. Copilot can use error messages to retry or adjust its approach.
+- **Use environment variables for configuration** — Database paths, API keys, and other settings should come from environment variables, not hardcoded values.
+- **Test with the MCP Inspector first** — Validate your tools work correctly with the Inspector before integrating with Copilot. It's much easier to debug protocol issues in the Inspector's UI.
+
+---
+
+## Limitations & Considerations
+
+- **Security surface area** — MCP servers run with the permissions of the user who starts them. A tool that executes SQL or shell commands can be powerful but dangerous. Scope permissions tightly and audit tool usage.
+- **No built-in authentication** — The MCP protocol does not include authentication between client and server for stdio transports. Anyone who can start the server process can use it. For remote (HTTP/SSE) servers, implement your own auth layer.
+- **Tool discovery is static** — The server declares its tools at initialization. You cannot dynamically add or remove tools during a session without restarting the server.
+- **Response size limits** — Very large tool responses (multi-MB query results, large file contents) may be truncated or cause performance issues in the client. Paginate large results and return summaries where possible.
+- **SDK maturity** — The MCP SDK is evolving. Pin your SDK version and check the changelog before upgrading, as breaking changes may occur between minor versions.
+- **Debugging complexity** — When Copilot doesn't call your tool as expected, it can be hard to diagnose. Use the MCP Inspector and verbose logging to understand the client-server interaction.
+
+---
+
 ## Summary
 
 In this workshop you learned how to:
