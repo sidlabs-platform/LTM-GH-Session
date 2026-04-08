@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ProgressTracker from '@/components/ProgressTracker.astro';
 
 interface Props {
   title: string;
@@ -13,6 +14,10 @@ interface Props {
 
 const { title, description, category, difficulty, duration, lastUpdated, editUrl } = Astro.props;
 const basePath = import.meta.env.BASE_URL;
+
+// Derive course ID from URL: e.g. /LTM-GH-Session/workshops/code-completion/ → workshops/code-completion
+const urlPath = Astro.url.pathname.replace(basePath, '').replace(/\/$/, '');
+const courseId = urlPath;
 
 const difficultyColors = {
   beginner: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
@@ -61,9 +66,12 @@ const difficultyColors = {
     </header>
 
     <!-- Content -->
-    <article class="prose dark:prose-invert">
+    <article class="prose dark:prose-invert" data-pagefind-body>
       <slot />
     </article>
+
+    <!-- Progress Tracker -->
+    <ProgressTracker courseId={courseId} />
 
     <!-- Footer actions -->
     <div class="mt-12 flex items-center justify-between border-t border-surface-200 pt-6 dark:border-surface-800">

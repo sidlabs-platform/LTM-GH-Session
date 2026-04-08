@@ -16,9 +16,20 @@ const difficultyColors = {
   intermediate: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
   advanced: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
 };
+
+// Derive course ID from href: e.g. /LTM-GH-Session/workshops/code-completion → workshops/code-completion
+const basePath = import.meta.env.BASE_URL;
+const courseId = href.replace(basePath, '').replace(/\/$/, '');
 ---
 
-<a href={href} class="group block rounded-xl border border-surface-200 bg-white p-6 shadow-sm transition-all hover:border-primary-300 hover:shadow-md dark:border-surface-700 dark:bg-surface-900 dark:hover:border-primary-600">
+<a href={href} class="group relative block rounded-xl border border-surface-200 bg-white p-6 shadow-sm transition-all hover:border-primary-300 hover:shadow-md dark:border-surface-700 dark:bg-surface-900 dark:hover:border-primary-600" data-course-id={courseId}>
+  <!-- Completion badge (hidden by default, shown via JS) -->
+  <span
+    class="course-complete-badge absolute -right-2 -top-2 hidden h-6 w-6 items-center justify-center rounded-full bg-green-500 text-white shadow-sm"
+    aria-label="Completed"
+  >
+    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+  </span>
   <div class="flex items-start gap-4">
     {icon && <span class="text-3xl" role="img">{icon}</span>}
     <div class="flex-1 min-w-0">
@@ -48,3 +59,16 @@ const difficultyColors = {
     <svg class="h-5 w-5 flex-shrink-0 text-surface-400 group-hover:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
   </div>
 </a>
+
+<script is:inline>
+(function () {
+  var cards = document.querySelectorAll('[data-course-id]');
+  cards.forEach(function (card) {
+    var id = card.getAttribute('data-course-id');
+    if (localStorage.getItem('copilot-learn-progress:' + id) === 'true') {
+      var badge = card.querySelector('.course-complete-badge');
+      if (badge) badge.classList.replace('hidden', 'inline-flex');
+    }
+  });
+})();
+</script>

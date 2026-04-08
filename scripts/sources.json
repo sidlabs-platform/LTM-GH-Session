@@ -51,7 +51,7 @@
       "url": "https://devblogs.microsoft.com",
       "type": "blog",
       "phase": 2,
-      "enabled": false,
+      "enabled": true,
       "topics": ["copilot", "ai", "development", "azure"]
     },
     {
@@ -60,7 +60,7 @@
       "url": "https://www.anthropic.com/news",
       "type": "blog",
       "phase": 2,
-      "enabled": false,
+      "enabled": true,
       "topics": ["ai", "claude", "agents", "mcp"]
     },
     {
@@ -69,7 +69,7 @@
       "url": "https://openai.com/blog",
       "type": "blog",
       "phase": 2,
-      "enabled": false,
+      "enabled": true,
       "topics": ["ai", "gpt", "models", "agents"]
     },
     {
@@ -78,8 +78,44 @@
       "url": "https://code.visualstudio.com/updates",
       "type": "changelog",
       "phase": 2,
-      "enabled": false,
+      "enabled": true,
       "topics": ["vscode", "editor", "features", "copilot"]
+    },
+    {
+      "id": "devto-copilot",
+      "name": "Dev.to Copilot Tag",
+      "url": "https://dev.to/t/githubcopilot",
+      "type": "community blog",
+      "phase": 3,
+      "enabled": true,
+      "topics": ["copilot", "community", "tutorials"]
+    },
+    {
+      "id": "github-skills",
+      "name": "GitHub Skills",
+      "url": "https://skills.github.com",
+      "type": "documentation",
+      "phase": 3,
+      "enabled": true,
+      "topics": ["copilot", "learning", "exercises"]
+    },
+    {
+      "id": "github-youtube",
+      "name": "GitHub YouTube",
+      "url": "https://www.youtube.com/@GitHub",
+      "type": "video",
+      "phase": 3,
+      "enabled": true,
+      "topics": ["copilot", "tutorials", "demos"]
+    },
+    {
+      "id": "vscode-copilot-tips",
+      "name": "Copilot Tips (from VS Code)",
+      "url": "https://code.visualstudio.com/docs/copilot/copilot-tips",
+      "type": "documentation",
+      "phase": 3,
+      "enabled": true,
+      "topics": ["tips", "productivity", "copilot"]
     }
   ],
   "generation": {
